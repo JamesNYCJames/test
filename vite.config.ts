@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/test/' : '/', // Correct base path for your 'test' repository
   plugins: [react()],
   build: {
-    outDir: 'dist',
+    outDir: 'dist', // Output directory for the build
     sourcemap: false, // Set to true if you want source maps in production
-    // Optimize the build
-    minify: 'terser',
+    minify: 'terser', // Use Terser for minification
     terserOptions: {
       compress: {
         drop_console: true, // Remove console.logs in production
@@ -15,6 +16,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ['lucide-react'], // Exclude dependencies from optimization
   },
 });
